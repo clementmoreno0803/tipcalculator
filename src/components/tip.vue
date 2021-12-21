@@ -1,0 +1,32 @@
+<template>
+  <button v-for="(tip, index) in tips" :key="index" @click="$emit('tipsValue()',tips[index].amount)">
+    {{ tip.valeur + "%" }}
+  </button>
+</template>
+//PENSER A $EMIT POUR LE TRANSFERT DE DONNEES//
+<script>
+export default {
+  name: "tipsbuton",
+  data() {
+    return {
+      tips: [
+        { valeur: 5, amount: 1.05 },
+        { valeur: 10, amount: 1.1 },
+        { valeur: 15, amount: 1.15 },
+        { valeur: 25, amount: 1.25 },
+        { valeur: 50, amount: 1.5 },
+      ],
+      props: ["tips"],
+      emits: ['tipvalue']
+    };
+  },
+  methods: {
+    tipsValue() {
+      this.$emit('tipvalue')
+    },
+  },
+};
+</script>
+
+<style>
+</style>
