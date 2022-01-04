@@ -1,5 +1,5 @@
 <template>
-  <button v-for="(tip, index) in tips" :key="index" @click="$emit('tipsValue()',tips[index].amount)">
+  <button v-for="(tip, index) in tips" :key="index" @click="tipsValue(index)">
     {{ tip.valeur + "%" }}
   </button>
 </template>
@@ -16,13 +16,12 @@ export default {
         { valeur: 25, amount: 1.25 },
         { valeur: 50, amount: 1.5 },
       ],
-      props: ["tips"],
-      emits: ['tipvalue']
+      props: { tips: Number },
     };
   },
   methods: {
-    tipsValue() {
-      this.$emit('tipvalue')
+    tipsValue(index) {
+      this.$emit("val", {tipsamount: this.tips[index].amount});
     },
   },
 };

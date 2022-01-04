@@ -10,12 +10,15 @@
       <div class="left-part">
         <div class="input_calculator">
           <label for="bill">Bill</label>
-          <input type="text" name="bill" v-model="bill" placeholder="0" />
+          <div class="input_with_icon">
+            <img src="./assets/icon-dollar.svg" alt="" />
+            <input type="text" name="bill" v-model="bill" placeholder="0" />
+          </div>
         </div>
         <div class="input_calculator">
           <label for="tip">Select Tip %</label>
           <div class="tips-amount">
-            <tipsbuton @tipvalue='value'></tipsbuton>
+            <tipsbuton @val="tipval"></tipsbuton>
             <input
               type="text"
               id="custometip"
@@ -26,8 +29,11 @@
         </div>
         <div class="input_calculator">
           <label for="person">Number of People</label>
-          <input type="text" name="person" v-model="person" placeholder="0" />
-          <div v-if="person == '0'"></div>
+          <div class="input_with_icon">
+            <img src="./assets/icon-person.svg" alt="" />
+            <input type="text" name="person" v-model="person" placeholder="0" />
+            <div v-if="person == '0'"></div>
+          </div>
         </div>
       </div>
       <div class="tips_container">
@@ -77,8 +83,13 @@ export default {
   },
   computed: {
     tipsperperson() {
-      return "$ " + ((parseInt(this.bill) * this.tipsValue) / parseInt(this.person)),
-      console.log(this.tipsValue)
+      return (
+        "$ " +
+        (
+          (parseInt(this.bill) * this.tipsamount - this.bill) /
+          parseInt(this.person)
+        ).toFixed(2)
+      );
     },
     tipscustom() {
       return (
@@ -92,13 +103,37 @@ export default {
       );
     },
     totaltips() {
-      return "$ " + ((this.bill / this.person)-(this.tipscustom)).toFixed(2),
-      console.log(this.customtip)
+      if (this.customtip != "") {
+        return (
+          "$ " +
+          (
+            this.bill / this.person +
+            ((("1" + parseInt(this.customtip) / 10) * parseInt(this.bill)) /
+              10 /
+              this.person -
+              this.bill / this.person) /
+              parseInt(this.person)
+          ).toFixed(2)
+        );
+      } else {
+        return (
+          "$ " +
+          (
+            this.bill / this.person +
+            (parseInt(this.bill) * this.tipsamount - this.bill) /
+              parseInt(this.person)
+          ).toFixed(2)
+        );
+      }
     },
   },
   methods: {
-    value(event){
-       console.log(event);
+    tipval(payload) {
+      this.tipsamount = payload.tipsamount;
+      console.log(this.tipsamount);
+    },
+    resetAll() {
+      return this.bill == 0;
     },
     alertZero() {
       alert("ceci ne peut pas être");
@@ -185,11 +220,22 @@ label {
   display: flex;
   flex-direction: column;
 }
+.input_with_icon img {
+  position: absolute;
+  z-index: 99;
+  padding: 15px;
+}
 input {
-  padding: 10px 0;
+  padding: 10px 15px;
   border: 1px solid grey;
   border-radius: 8px;
+  text-align: right;
+  font-family: "Montserrat";
+  font-size: 1.2rem;
+  color: var(--forthly);
+  width: -webkit-fill-available;
 }
+
 /* .tip_button{
   width: calc( 95% / 3);
     background: var(--thirdly);
@@ -219,9 +265,12 @@ button {
   border-radius: 5px;
 }
 #custometip {
-  width: calc(90% / 3);
+  position: relative;
+  width: calc(63% / 3);
   height: 9px;
-  margin: 4px;
+  text-align: center;
+  left: 5px;
+  top: 2px;
 }
 /* ----Right part---- */
 .tips_container {
