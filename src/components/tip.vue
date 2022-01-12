@@ -3,7 +3,6 @@
     {{ tip.valeur + "%" }}
   </button>
 </template>
-//PENSER A $EMIT POUR LE TRANSFERT DE DONNEES//
 <script>
 export default {
   name: "tipsbuton",

@@ -70,16 +70,26 @@
 
 <script>
 import tipsbuton from "./components/tip.vue";
+import useValidate from "@vuelidate/core";
+import {required} from "@vuelidate/validators"
 export default {
   name: "App",
   components: { tipsbuton },
   data() {
     return {
+      v$: useValidate(),
       bill: "",
       person: "",
       customtip: "",
       reset: "RESET",
     };
+  },
+  validations() {
+    return {
+      bill: {required},
+      person: {required},
+      customtip: {required}
+    }
   },
   computed: {
     tipsperperson() {
@@ -131,9 +141,6 @@ export default {
     tipval(payload) {
       this.tipsamount = payload.tipsamount;
       console.log(this.tipsamount);
-    },
-    resetAll() {
-      return this.bill == 0;
     },
     alertZero() {
       alert("ceci ne peut pas être");
