@@ -197,7 +197,6 @@ label {
 /* ------ GENERALE ------ */
 .app_container {
   width: 100vw;
-  height: 100vh;
   background: var(--primary);
   display: flex;
   align-items: center;
@@ -309,5 +308,23 @@ button {
 .reset_btn:hover {
   background: var(--fifty);
   transition: all 0.2s ease-in-out;
+}
+
+@media (max-width:688px){
+
+/* ----LEFT PART ---  */
+.calculator_container{
+  width: calc(100%-40px);
+  height: 100vh;
+}
+.left-part{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* -----RIGHT PART---- */
+.tips_container{
+width:calc(100% - 40px);
+}
 }
 </style>

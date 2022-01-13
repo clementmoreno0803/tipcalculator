@@ -2,13 +2,13 @@
 # abort on errors
 set -e
 # build
-yarn run build
+npm run build
 # navigate into the build output directory
 cd dist
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m 'new deployment'
 git push -f git@github.com:clementmoreno0803/tipcalculator.git master:gh-pages
 cd -
