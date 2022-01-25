@@ -323,5 +323,8 @@ button {
   .tips_container {
     width: calc(100% - 40px);
   }
+  .reset_btn {
+  position: relative;
+}
 }
 </style>
