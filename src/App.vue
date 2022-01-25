@@ -302,10 +302,11 @@ button {
   transition: all 0.2s ease-in-out;
 }
 @media (max-width: 982px) {
-.app_container svg{
-  margin: 60px 0;
-  height: 80px;
-}
+  .app_container svg {
+    margin: 60px 0;
+    height: 80px;
+    overflow: overlay;
+  }
 
   /* ----LEFT PART ---  */
   .calculator_container {
