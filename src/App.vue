@@ -71,7 +71,7 @@
 <script>
 import tipsbuton from "./components/tip.vue";
 import useValidate from "@vuelidate/core";
-import {required} from "@vuelidate/validators"
+import { required } from "@vuelidate/validators";
 export default {
   name: "App",
   components: { tipsbuton },
@@ -86,10 +86,10 @@ export default {
   },
   validations() {
     return {
-      bill: {required},
-      person: {required},
-      customtip: {required}
-    }
+      bill: { required },
+      person: { required },
+      customtip: { required },
+    };
   },
   computed: {
     tipsperperson() {
@@ -197,6 +197,7 @@ label {
 /* ------ GENERALE ------ */
 .app_container {
   width: 100vw;
+  height: 100vh;
   background: var(--primary);
   display: flex;
   align-items: center;
@@ -241,15 +242,6 @@ input {
   color: var(--forthly);
   width: -webkit-fill-available;
 }
-
-/* .tip_button{
-  width: calc( 95% / 3);
-    background: var(--thirdly);
-    margin: 2px;
-    color: white;
-    font-size: 1rem;
-    font-family: 'Montserrat';
-} */
 
 input:focus {
   outline: none !important;
@@ -309,22 +301,26 @@ button {
   background: var(--fifty);
   transition: all 0.2s ease-in-out;
 }
-
-@media (max-width:688px){
-
-/* ----LEFT PART ---  */
-.calculator_container{
-  width: calc(100%-40px);
-  height: 100vh;
-}
-.left-part{
-  width: 100%;
-  margin-bottom: 10px;
+@media (max-width: 982px) {
+.app_container svg{
+  margin: 60px 0;
+  height: 80px;
 }
 
-/* -----RIGHT PART---- */
-.tips_container{
-width:calc(100% - 40px);
-}
+  /* ----LEFT PART ---  */
+  .calculator_container {
+    width: calc(100% - 40px);
+    flex-direction: column;
+    height: 100vh;
+  }
+  .left-part {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* -----RIGHT PART---- */
+  .tips_container {
+    width: calc(100% - 40px);
+  }
 }
 </style>
